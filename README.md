@@ -1,0 +1,2 @@
+# MyCursurAI
+MyCursurAI
