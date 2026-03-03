@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Cursor Android | IDE</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">Cursor <span>Android</span></div>
+        <div class="mode-switcher">
+            <div class="m-tab active" id="btn-normal" onclick="setStyleMode('normal')">Normal</div>
+            <div class="m-tab" id="btn-coding" onclick="setStyleMode('coding')">Coding</div>
+        </div>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar hidden" id="sidebar"></aside>
+        <main class="main-view">
+            <div id="chat-screen"></div>
+            <div id="editor-view" style="display:none;"></div>
+            <div class="composer-box">
+                <textarea id="user-input" placeholder="Ask AI..."></textarea>
+                <button id="send-btn">✨</button>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
