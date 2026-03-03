@@ -1,0 +1,9 @@
+{
+  "name": "cursor-android",
+  "version": "1.0.0",
+  "description": "Mobile IDE with Turso and AI",
+  "main": "api/chat.js",
+  "dependencies": {
+    "@libsql/client": "^0.6.0"
+  }
+}
