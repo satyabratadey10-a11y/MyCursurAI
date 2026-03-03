@@ -2,6 +2,16 @@ let currentMode = 'normal';
 let queue = [];
 let lastCall = 0;
 
+// Check if user is logged in on page load
+window.onload = function() {
+    const session = localStorage.getItem('cursor_session');
+    if (!session) {
+        // Redirect to your Glassmorphism login page
+        window.location.href = '/login.html';
+    }
+};
+
+
 // Protects Gemini Key (9 RPM)
 async function processQueue() {
     if (queue.length === 0) return;
