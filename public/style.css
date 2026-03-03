@@ -1,0 +1,167 @@
+/* AMOLED Dark Theme for Vivo Y51A */
+:root {
+    --bg-dark: #000000;
+    --bg-sidebar: #0b0b0b;
+    --border: #1e1e1e;
+    --accent: #007acc;
+    --error: #ff4444;
+    --text: #d4d4d4;
+    --text-dim: #666666;
+}
+
+/* Base Styles */
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    -webkit-tap-highlight-color: transparent; 
+}
+
+body { 
+    font-family: 'Inter', sans-serif; 
+    background: var(--bg-dark); 
+    color: var(--text); 
+    height: 100vh; 
+    display: flex; 
+    flex-direction: column; 
+    overflow: hidden; 
+}
+
+/* Header & Mode Switcher */
+.header { 
+    height: 45px; 
+    background: var(--bg-sidebar); 
+    border-bottom: 1px solid var(--border); 
+    display: flex; 
+    align-items: center; 
+    padding: 0 12px; 
+    justify-content: space-between; 
+    z-index: 100; 
+}
+
+.logo span { color: var(--accent); font-weight: 600; }
+
+.mode-switcher { 
+    display: flex; 
+    background: #111; 
+    border-radius: 6px; 
+    padding: 2px; 
+    border: 1px solid var(--border); 
+}
+
+.m-tab { 
+    padding: 4px 10px; 
+    font-size: 10px; 
+    font-weight: 600; 
+    cursor: pointer; 
+    border-radius: 4px; 
+    color: var(--text-dim); 
+}
+
+.m-tab.active { background: var(--accent); color: white; }
+
+/* Layout Containers */
+.container { flex: 1; display: flex; overflow: hidden; }
+
+.sidebar { 
+    width: 75px; 
+    background: var(--bg-sidebar); 
+    border-right: 1px solid var(--border); 
+    display: flex; 
+    flex-direction: column; 
+    padding: 10px 0; 
+    overflow-y: auto; 
+    transition: 0.3s; 
+}
+
+.sidebar.hidden { width: 0; padding: 0; border: none; }
+
+.file-item { 
+    color: var(--text-dim); 
+    cursor: pointer; 
+    font-size: 9px; 
+    text-align: center; 
+    width: 100%; 
+    padding: 8px 2px; 
+    border-bottom: 1px solid #111; 
+    word-break: break-all; 
+}
+
+.file-item.active { 
+    color: var(--accent); 
+    background: rgba(0, 122, 204, 0.1); 
+    border-right: 2px solid var(--accent); 
+}
+
+/* Main View & Chat */
+.main-view { 
+    flex: 1; 
+    display: flex; 
+    flex-direction: column; 
+    background: var(--bg-dark); 
+    overflow: hidden; 
+}
+
+#chat-screen { 
+    flex: 1; 
+    padding: 15px; 
+    overflow-y: auto; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 15px; 
+    font-size: 13px; 
+    scroll-behavior: smooth; 
+}
+
+.user-msg { color: #ffffff; border-left: 2px solid #333; padding-left: 10px; }
+.ai-msg { color: var(--text); line-height: 1.6; }
+
+/* Editor for Coding Mode */
+#editor-view { 
+    display: none; 
+    flex: 1; 
+    padding: 15px; 
+    font-family: 'JetBrains Mono', monospace; 
+    font-size: 12px; 
+    overflow: auto; /* Multi-directional scroll for long code */
+    white-space: pre; 
+    color: #abb2bf; 
+}
+
+/* Composer / Input Area */
+.composer-box { 
+    padding: 10px; 
+    background: var(--bg-sidebar); 
+    border-top: 1px solid var(--border); 
+}
+
+.composer { 
+    background: #000; 
+    border: 1px solid var(--border); 
+    border-radius: 8px; 
+    padding: 10px; 
+}
+
+textarea { 
+    width: 100%; 
+    background: #111; 
+    border: 1px solid #333; 
+    border-radius: 6px; 
+    padding: 10px; 
+    color: white; 
+    font-size: 14px; 
+    resize: none; 
+    min-height: 40px; 
+    outline: none; 
+}
+
+#send-btn { 
+    margin-top: 8px;
+    width: 100%; 
+    padding: 10px; 
+    background: var(--accent); 
+    color: white; 
+    border: none; 
+    border-radius: 6px; 
+    font-weight: 600;
+}
