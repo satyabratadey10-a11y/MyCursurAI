@@ -1,13 +1,11 @@
 const db = require('../lib/db');
 
-
- // SECURE: Use Environment Variables instead of hardcoded strings
+// SECURE: These names must match the "Keys" you just typed in Vercel
 const KEYS = {
     gemini: process.env.GEMINI_API_KEY,
     groq: process.env.GROQ_API_KEY,
     huggingface: process.env.HUGGINGFACE_API_KEY
 };
-
 
 export default async function handler(req, res) {
     if (req.method !== 'POST') return res.status(405).send('Method Not Allowed');
