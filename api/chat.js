@@ -1,11 +1,13 @@
 const db = require('../lib/db');
 
-// Secure Server-Side Keys
+
+ // SECURE: Use Environment Variables instead of hardcoded strings
 const KEYS = {
-    gemini: "AIzaSyC7Q15NjqrcFbiBaLSBmgWRg8eo11mUclU",
-    groq: "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",
-    huggingface: "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"
+    gemini: process.env.GEMINI_API_KEY,
+    groq: process.env.GROQ_API_KEY,
+    huggingface: process.env.HUGGINGFACE_API_KEY
 };
+
 
 export default async function handler(req, res) {
     if (req.method !== 'POST') return res.status(405).send('Method Not Allowed');
