@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Cursor Android | IDE</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body data-mode="normal">
+
     <header class="header">
         <div class="logo">Cursor <span>Android</span></div>
         <div class="mode-switcher">
@@ -17,15 +19,30 @@
 
     <div class="container">
         <aside class="sidebar hidden" id="sidebar"></aside>
+
         <main class="main-view">
-            <div id="chat-screen"></div>
+            <div id="chat-screen">
+                <div class="ai-msg"><b>System:</b> Connected to Turso DB. Ready for input.</div>
+            </div>
+            
             <div id="editor-view" style="display:none;"></div>
+
             <div class="composer-box">
-                <textarea id="user-input" placeholder="Ask AI..."></textarea>
-                <button id="send-btn">✨</button>
+                <div class="composer-top">
+                    <select id="model-select">
+                        <option value="gemini">Gemini 2.5 Flash</option>
+                        <option value="qwen">Qwen 2.5 Coder</option>
+                    </select>
+                    <span id="queue-status" style="font-size:10px; color:var(--accent);">9 RPM Slot Active</span>
+                </div>
+                <div class="input-row">
+                    <textarea id="user-input" placeholder="Ask AI or type command..." rows="1"></textarea>
+                    <button id="send-btn">✨</button>
+                </div>
             </div>
         </main>
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>
