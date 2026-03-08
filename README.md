@@ -1,2 +1,2 @@
 # MyCursurAI
-MyCursurAI
+MyCursurAI test
