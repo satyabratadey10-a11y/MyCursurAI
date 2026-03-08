@@ -1,57 +1,43 @@
-let currentMode = 'normal';
-let queue = [];
-let lastCall = 0;
+// Global State for Hyper Self
+let hyperActive = false;
+let startTime = null;
+const RPM_LIMIT = 9;
+let requestCount = 0;
 
-// Check if user is logged in on page load
-window.onload = function() {
-    const session = localStorage.getItem('cursor_session');
-    if (!session) {
-        // Redirect to your Glassmorphism login page
-        window.location.href = '/login.html';
-    }
-};
+async function startHyperSelf(initialTask) {
+    hyperActive = true;
+    startTime = Date.now();
+    renderTerminal("✨ HYPER SELF Mode Activated: Initializing 1-hour deep-fix loop...");
 
+    while (hyperActive) {
+        // Check 1-hour limit (3600000 ms)
+        if (Date.now() - startTime > 3600000) {
+            stopHyperSelf("Time limit reached.");
+            break;
+        }
 
-// Protects Gemini Key (9 RPM)
-async function processQueue() {
-    if (queue.length === 0) return;
-    const now = Date.now();
-    if (now - lastCall > 6667) {
-        const { task, resolve } = queue.shift();
-        lastCall = Date.now();
-        resolve(await task());
-        processQueue();
-    } else {
-        setTimeout(processQueue, 1000);
+        // 9 RPM Rate Limiter
+        if (requestCount >= RPM_LIMIT) {
+            renderTerminal("⏳ Rate limit reached. Cooling down for 60s...");
+            await new Promise(r => setTimeout(r, 60000));
+            requestCount = 0;
+        }
+
+        try {
+            const response = await executeAgenticCycle(initialTask);
+            if (response.status === 'fixed') {
+                renderTerminal("✅ Logic Self-Corrected successfully.");
+                hyperActive = false;
+            }
+            requestCount++;
+        } catch (err) {
+            renderTerminal(`⚠️ Error detected: ${err.message}. Re-routing to Gemini for fix...`);
+        }
     }
 }
 
-function setStyleMode(mode) {
-    currentMode = mode;
-    document.getElementById('sidebar').classList.toggle('hidden', mode === 'normal');
-    // Toggle active tabs
+function renderTerminal(msg) {
+    const term = document.getElementById('hyper-terminal');
+    term.innerHTML += `<div>[${new Date().toLocaleTimeString()}] ${msg}</div>`;
+    term.scrollTop = term.scrollHeight;
 }
-
-document.getElementById('send-btn').onclick = async () => {
-    const prompt = document.getElementById('user-input').value;
-    
-    // Enforcement: Normal Mode cannot write files
-    if (currentMode === 'normal' && prompt.includes("file")) {
-        alert("Mode Not Supported: Switch to Coding Mode");
-        return;
-    }
-
-    const task = async () => {
-        const res = await fetch('/api/chat', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ prompt, mode: currentMode, model: 'gemini' })
-        });
-        return await res.json();
-    };
-
-    queue.push({ task, resolve: (data) => {
-        document.getElementById('chat-screen').innerHTML += `<div>${data.response}</div>`;
-    }});
-    processQueue();
-};
