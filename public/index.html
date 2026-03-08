@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Cursor Android | IDE</title>
+    <!-- Modern Fonts for Coding & Interface -->
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body data-mode="normal">
 
+    <!-- Header Section: Mode & Model Status -->
     <header class="header">
         <div class="logo">Cursor <span>Android</span></div>
         <div class="mode-switcher">
@@ -17,32 +19,79 @@
         </div>
     </header>
 
-    <div class="container">
-        <aside class="sidebar hidden" id="sidebar"></aside>
+    <!-- HYPER SELF Progress Bar (1-Hour Fix Monitor) -->
+    <div id="hyper-status-bar" class="hidden">
+        <div class="status-info">
+            <span class="pulse-red"></span>
+            <span>HYPER SELF ACTIVE</span>
+        </div>
+        <div class="status-center">
+            <progress id="fix-progress" value="0" max="100"></progress>
+        </div>
+        <div class="status-timer">
+            <span id="timer">60:00</span>
+        </div>
+    </div>
 
+    <div class="container">
+        <!-- Sidebar: File Explorer (Visible in Coding Mode) -->
+        <aside class="sidebar hidden" id="sidebar">
+            <div class="sidebar-label">PROJECT FILES</div>
+            <div id="file-list"></div>
+        </aside>
+
+        <!-- Main Content Area -->
         <main class="main-view">
+            <!-- AI Chat Conversation Display -->
             <div id="chat-screen">
-                <div class="ai-msg"><b>System:</b> Connected to Turso DB. Ready for input.</div>
+                <div class="system-welcome">
+                    <b>System:</b> Connected to <i>Turso Cloud DB</i>. 
+                    <br>All features synced. Welcome back, Dev.
+                </div>
             </div>
             
+            <!-- Code Editor View (AMOLED Optimized) -->
             <div id="editor-view" style="display:none;"></div>
 
+            <!-- Agentic Terminal: HYPER SELF Debugging Output -->
+            <div id="hyper-panel" class="hidden">
+                <div class="panel-header">
+                    <span>DEBUG TERMINAL</span>
+                    <button onclick="toggleTerminal()" class="close-panel">×</button>
+                </div>
+                <div id="hyper-terminal">
+                    <div class="term-line">> Initializing Agentic Orchestrator...</div>
+                </div>
+            </div>
+
+            <!-- Composer Area: Input & Configuration -->
             <div class="composer-box">
                 <div class="composer-top">
-                    <select id="model-select">
-                        <option value="gemini">Gemini 2.5 Flash</option>
-                        <option value="qwen">Qwen 2.5 Coder</option>
-                    </select>
-                    <span id="queue-status" style="font-size:10px; color:var(--accent);">9 RPM Slot Active</span>
+                    <div class="config-group">
+                        <select id="model-select">
+                            <option value="qwen-3.5">Qwen 3.5 (Logic)</option>
+                            <option value="gemini">Gemini 1.5 Flash</option>
+                            <option value="qwen-coder">Qwen 2.5 Coder</option>
+                        </select>
+                        <div class="hyper-toggle">
+                            <input type="checkbox" id="hyper-mode-check">
+                            <label for="hyper-mode-check">HYPER SELF</label>
+                        </div>
+                    </div>
+                    <span id="queue-status">9 RPM SLOT: READY</span>
                 </div>
+
+                <!-- Input Row: Textarea & Send Button -->
                 <div class="input-row">
-                    <textarea id="user-input" placeholder="Ask AI or type command..." rows="1"></textarea>
+                    <textarea id="user-input" placeholder="Ask AI to write logic or fix errors..." rows="1"></textarea>
                     <button id="send-btn">✨</button>
                 </div>
             </div>
         </main>
     </div>
 
+    <!-- Main Logic Script -->
     <script src="script.js"></script>
 </body>
 </html>
+
